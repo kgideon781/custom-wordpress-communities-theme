@@ -1,0 +1,505 @@
+/*
+Theme Name: My Community Theme
+Author: Your Name
+Description: A custom community theme for WordPress.
+Version: 1.0
+*/
+
+:root {
+    --grey-text: #353C41;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #DEDEDE;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header h1 a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav {
+    margin-top: 10px;
+}
+.logout-button {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.logout-button a.btn-logout {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0073aa; /* Change to match your theme */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.logout-button a.btn-logout:hover {
+    background-color: #005177; /* Change to match your theme */
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+nav > .menu > ul{
+    display: flex;
+    gap: 10px;
+    list-style: none;
+
+}
+nav > .menu > ul > li > a{
+    color: #fff;
+    text-decoration: none;
+}
+
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.content-area {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 20px 0;
+    padding-bottom: 100px;
+
+}
+#communities-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    margin: 5px; padding: 0 10px 10px 10px;
+}
+
+.single-community-container{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+.single-group-hero-section{
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+.community-single-inner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.community-single-inner > div > h1{
+    font-size: 24px;
+}
+.community-topics-list{
+    background: #fff;
+
+}
+.community-topics-list ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.community-topics-list ul li{
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+}
+.communities-container-left{
+    width: 70%;
+
+}
+.communities-container-right{
+    width: 30%;
+}
+.topics-list-author-container{
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+.topics-list-author-container img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.topics-list-right-inner{
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+.topics-right{
+    margin-left: 20px;
+
+}
+.topics-right .community-sidebar{
+    background: #fff;
+    padding: 2px 10px;
+}
+.topics-right .community-sidebar h3{
+    font-size: 18px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc
+}
+.topics-right .community-sidebar ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.topics-right .community-sidebar ul li{
+    padding: 10px;
+}
+.topics-right .community-popular-topics{
+    margin-top: 10px;
+    padding: 2px 10px;
+    background: #fff;
+
+}
+.topics-right .community-popular-topics h3{
+    font-size: 18px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc
+}
+/* Container styling */
+#new-topic-container {
+
+}
+.popular-topics-list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+}
+.popular-topics-list li{
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Form heading styling */
+#new-topic-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Form styling */
+form#new-topic {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Label styling */
+.lbl-topic-title,
+.lbl-topic-content {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+/* Input field styling */
+.input-topic-title,
+.txt-topic-content {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Textarea styling */
+.txt-topic-content {
+    height: 100px;
+    resize: vertical;
+}
+
+/* Submit button styling */
+.btn-submit-topic {
+    background: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Submit button hover effect */
+.btn-submit-topic:hover {
+    background: #0056b3;
+}
+
+
+/*======================SINGLE TOPIC STYLING===========================*/
+
+/*Single Topic Container*/
+.single-topic-container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border-radius: 5px 5px 0 0;
+    padding: 10px;
+    background: #fff;
+}
+.reply {
+    margin: 10px 10px 0 10px;
+    padding: 0 30px 10px 5px;
+    display: flex;
+}
+.reply-side{
+    background: #fff;
+    border-radius: 5px;
+}
+.topic-single-body > h2 {
+    padding-left: 10px;
+    font-size: 18px;
+}
+.replies{
+
+}
+
+.single-topic-container h1{
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+.single-topic-container span{
+    color: #777;
+    font-size: 14px;
+
+}
+.single-topic-header-meta{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.single-topic-header-meta .topic-single-author{
+    margin-right: 10px;
+}
+
+/*Replies styling*/
+.reply-author-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px;
+    margin-bottom: 10px;
+    gap: 5px;
+}
+.reply-author{
+    font-size: 16px;
+    text-align: center;
+}
+.reply-side{
+    padding: 10px;
+    width: 700px;
+
+}
+.reply-author-avatar{
+    width: 70px;
+    height: 70px;
+    border-radius: 5%;
+    margin-right: 10px;
+}
+.reply-author-container-inner{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+}
+.reply-author-role{
+    font-size: 14px;
+
+}
+.reply-author-container-inner .reply-author{
+    text-transform: capitalize;
+}
+.reply-side .reply-date{
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+.reply-author-posts{
+    font-size: 14px;
+    color: #353C41;
+}
+
+/*New Reply form Styling*/
+.new-reply-form-container{
+    width: 100%;
+    padding: 20px;
+    margin: 0 200px;
+}
+.new-reply-form-container h2{
+    color: #333;
+    margin-bottom: 20px;
+}
+form#new-reply{
+    background: #fff;
+    padding: 20px;
+    width: 100%;
+    max-width: 700px;
+}
+.lbl-new-reply{
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+.txt-new-reply{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.btn-submit-reply{
+    background: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+.btn-submit-reply:hover{
+    background: #0056b3;
+}
+/*Reply Container Styling*/
+
+/*ADMIN CONTROLS AND TOGGLES*/
+
+.reply-controls a {
+    text-decoration: none;
+    color: #0073aa; /* Customize as needed */
+    margin-right: 10px;
+}
+
+.reply-controls a:hover {
+    color: #005177; /* Customize as needed */
+}
+
+/* WYSIWYG Editor */
+#reply_content_ifr {
+    width: 100%;
+    height: auto;
+    min-height: 100px;
+}
+
+/*======================TOPIC STYLING===========================*/
+
+/*=======================LOGIN STYLING=========================*/
+#loginform-custom{
+    width: 100%;
+    max-width: 400px;
+    margin: 5% auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.loginform-custom h2{
+    color: #333;
+    margin-bottom: 20px;
+}
+.login-username label{
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+.login-username input{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.login-password label{
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+.login-password input{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.login-remember{
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.login-submit input{
+    background: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+#sign-up-form-custom{
+    width: 100%;
+    max-width: 400px;
+    margin: 10px auto 10% auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.lbl-sign-up-fname, .lbl-sign-up-lname,
+.lbl-sign-up-email, .lbl-sign-up-institution,
+.lbl-sign-up-aoi, .lbl-sign-up-reason, .lbl-sign-up-pwd,
+.lbl-sign-up-cnf-pwd{
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+#sign-up-form-custom input{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.sign-up-btn{
+    background: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
