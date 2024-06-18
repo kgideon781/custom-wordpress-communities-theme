@@ -12,6 +12,20 @@ if (!is_user_logged_in()) {
 	exit;
 }
 
+function get_community_member_emails($community_id) {
+	$members = get_post_meta($community_id, 'community_members', true);
+	if (is_array($members) && !empty($members)) {
+		$emails = [];
+		foreach ($members as $member_id) {
+			$user_info = get_userdata($member_id);
+			if ($user_info && !empty($user_info->user_email)) {
+				$emails[] = $user_info->user_email;
+			}
+		}
+		return $emails;
+	}
+	return [];
+}
 
 if (have_posts()) : while (have_posts()) : the_post();
 	$community_id = get_the_ID();
@@ -82,7 +96,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 	$topics = new WP_Query($args);
 	wp_reset_postdata();
 
-	// Fetch site-wide popular topics
+	/*// Fetch site-wide popular topics
 	$site_wide_args = array(
 		'post_type' => 'topic',
 		'posts_per_page' => -1  // Fetch all topics
@@ -134,7 +148,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 			return $b['replies_count'] - $a['replies_count'];
 		});
 	}
-
+*/
 
 	?>
 
@@ -296,6 +310,8 @@ if (have_posts()) : while (have_posts()) : the_post();
 					                    $last_reply_query->the_post();
 					                    $last_reply_author_id = get_the_author_meta('ID');
 					                    $last_reply_author = get_the_author_meta('display_name', $last_reply_author_id);
+					                    $profile_picture_id = get_user_meta($last_reply_author_id, 'profile_picture', true);
+					                    $profile_picture_url = $profile_picture_id ? wp_get_attachment_url($profile_picture_id) : get_avatar_url($last_reply_author_id);
 					                    $last_reply_avatar = get_avatar_url($last_reply_author_id, 50);
 					                    $last_reply_date = get_the_date('F j, Y \a\t g:i a');
 					                    wp_reset_postdata();
@@ -315,7 +331,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                                                 <!-- Replies count -->
 							                    <?php if (!empty($last_reply_author) && !empty($last_reply_date)) : ?>
                                                     <p style="margin-right: 15px; font-size: 15px;"><?php echo esc_html($replies_count); ?> replies</p>
-                                                    <img style="margin-right: 10px;" src="<?php echo esc_html($last_reply_avatar); ?>" alt="Author's profile image" class="topic-author-thumb" />
+                                                    <img style="margin-right: 10px;" src="<?php echo esc_html($profile_picture_url); ?>" alt="Author's profile image" class="topic-author-thumb" />
                                                     <div style="margin-right: 10px;">
                                                         <div style="display: flex; flex-direction: column; font-size: 13px;">
                                                             <a href="<?php echo site_url('/user-profile/?user_id=' . $last_reply_author_id); ?>"><?php echo get_the_author_meta('display_name', $last_reply_author_id); ?></a>
@@ -378,6 +394,9 @@ if (have_posts()) : while (have_posts()) : the_post();
 					                    )
 				                    );
 				                    wp_insert_post($new_topic);
+
+				                    // Redirect to the same page to avoid form resubmission
+				                    wp_redirect(esc_url(add_query_arg('status', 'success', get_permalink())));
 				                    echo '<p>Topic created.</p>';
 			                    }
 			                    ?>

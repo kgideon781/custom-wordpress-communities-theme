@@ -325,38 +325,48 @@ function custom_login_redirect($redirect_to, $request, $user) {
 		session_start();
 	}
 
+	// If there's a session-stored redirect URL, use it
+	if (!empty($_SESSION['redirect_to'])) {
+		$redirect_to = $_SESSION['redirect_to'];
+		unset($_SESSION['redirect_to']);
+	}
 	// Check if the user has roles and if they are an array
 	if (isset($user->roles) && is_array($user->roles)) {
 		// Handle redirection for 'pending' users
 		if (in_array('pending', $user->roles)) {
 			wp_logout(); // Log out the user
-			// Show an error message
-			return home_url('/pending-approval/');
+			return home_url('/pending-approval/'); // Redirect to a pending approval page
 		}
 
-		// Handle redirection for 'subscriber' users
-		if (in_array('subscriber', $user->roles)) {
-			// Redirect new users to the landing group page
-			redirect_new_users_to_landing_group();
-			return home_url('/dashboard/');
+		// Use redirect_to if provided and not empty
+		if (!empty($request)) {
+			return $request;
 		}
 
-		// Handle other roles
-		if (in_array('community_admin', $user->roles)) {
-			return home_url('/admin-dashboard/');
+		// Handle role-based redirection
+		if (in_array('administrator', $user->roles)) {
+			$redirect_to = admin_url(); // Redirect admins to the WP dashboard
+		} elseif (in_array('subscriber', $user->roles)) {
+			// Check if the user is new and redirect to the landing group page
+			$is_new_user = get_user_meta($user->ID, 'is_new_user', true);
+			if ($is_new_user === 'yes') {
+				update_user_meta($user->ID, 'is_new_user', 'no');
+				$redirect_to = home_url('/welcome-to-the-cop/');
+			} else {
+				$redirect_to = home_url('/dashboard/');
+			}
+		} elseif (in_array('community_admin', $user->roles)) {
+			$redirect_to = home_url('/admin-dashboard/');
 		} elseif (in_array('community_mod', $user->roles)) {
-			return home_url('/moderator-dashboard/');
+			$redirect_to = home_url('/moderator-dashboard/');
 		} elseif (in_array('community_participant', $user->roles)) {
-			return home_url('/community/');
+			$redirect_to = home_url('/community/');
+		} else {
+			// Fallback to home URL for other roles
+			$redirect_to = home_url();
 		}
 
-		// Default redirection: If a specific redirection URL was set in session
-		if (!empty($_SESSION['redirect_to'])) {
-			$redirect_to = $_SESSION['redirect_to'];
-			unset($_SESSION['redirect_to']);
-		} else {
-			$redirect_to = home_url(); // Fallback to home URL
-		}
+
 	}
 
 	return $redirect_to;
