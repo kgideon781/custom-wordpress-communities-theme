@@ -503,3 +503,60 @@ form#new-reply{
     cursor: pointer;
     width: 100%;
 }
+.profile-container{
+    padding-bottom: 5%;
+    margin-bottom: 50px;
+}
+.user-profile-img-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.user-profile-img-container img{
+    width: 100%;
+    max-width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 5px auto;
+    display: block;
+}
+.user-profile-name{
+    text-align: center;
+    margin: 10px 0;
+
+}
+.user-profile-name h4{
+    text-transform: uppercase;
+}
+.user-profile-bio{
+    padding: 5px;
+}
+.user-profile-meta{
+    padding: 5px;
+}
+.profile-communities{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+    max-width: 800px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+#edit-profile-button{
+    background: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
