@@ -140,8 +140,6 @@ function get_author_role($author_id, $community_id) {
 							$reply_content = $reply->post_content;
 							$reply_author_id = $reply->post_author;
 							$reply_author_avatar_url = get_avatar_url($reply_author_id, array('size' => 50));
-							$profile_picture_id = get_user_meta($reply_author_id, 'profile_picture', true);
-							$profile_picture_url = $profile_picture_id ? wp_get_attachment_url($profile_picture_id) : get_avatar_url($reply_author_id);
 							$reply_date = $reply->post_date;
 							$formatted_reply_date = custom_format_date($reply_date);
 							$is_admin = current_user_can('manage_options');
@@ -152,7 +150,7 @@ function get_author_role($author_id, $community_id) {
                             ?>
                             <div class="reply">
                                 <div class="reply-author-container">
-                                    <img src="<?php echo esc_url($profile_picture_url); ?>" alt="<?php echo esc_attr(get_the_author_meta('display_name', $reply_author_id)); ?>" class="reply-author-avatar" />
+                                    <img src="<?php echo esc_url($reply_author_avatar_url); ?>" alt="<?php echo esc_attr(get_the_author_meta('display_name', $reply_author_id)); ?>" class="reply-author-avatar" />
                                     <div class="reply-author-container-inner">
                                         <span class="reply-author"><?php echo get_the_author_meta('display_name', $reply_author_id); ?></span>
 
